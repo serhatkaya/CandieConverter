@@ -18,7 +18,7 @@ namespace CandieConverter.Controllers
 					string fileFolder = IOFile.Path.GetDirectoryName(request.Path);
 					string fileName = request.FileName.Split(".")[0];
 					//default jpeg.
-					string format = "JPG";
+					string format = "JPEG";
 					// Save frame as jpg
 					switch (request.TargetFormat)
 					{
@@ -26,9 +26,17 @@ namespace CandieConverter.Controllers
 							format = "JPG";
 							image.Format = MagickFormat.Jpg;
 							break;
+						case "JPEG":
+							format = "JPEG";
+							image.Format = MagickFormat.Jpeg;
+							break;
 						case "PNG":
 							format = "PNG";
 							image.Format = MagickFormat.Png;
+							break;
+						default:
+							format = "JPEG";
+							image.Format = MagickFormat.Jpeg;
 							break;
 					}
 

@@ -4,7 +4,12 @@
   let list = $("#selected-files-list");
   let totalFile = $("#total-file");
   var languageSelector = $("#languageSelector");
+  var fromSelector = $("#fromSelector");
+  var toSelector = $("#toSelector");
   var body = $("body");
+
+  var fromFormat = "ANY";
+  var toFormat = "JPEG";
   $.i18n()
     .load({
       en: "i18n/en.json",
@@ -19,9 +24,14 @@
     $.i18n().locale = lang;
     body.i18n();
   });
+
   function loadFiles(fileList) {
     const mappedfiles = [...fileList]
-      .filter((r) => r.name.includes(".HEIC"))
+      .filter((r) =>
+        fromFormat == "ANY"
+          ? true
+          : r.name.toLowerCase().includes(`.${fromFormat}`.toLowerCase())
+      )
       .map((x) => {
         return {
           lastModified: x.lastModified,
@@ -58,8 +68,13 @@
   }
 
   function convertFiles() {
-    files.forEach((r) => convertQueue.enqueue(r));
-    processQueue();
+    if (files.length > 0) {
+      files.forEach((r) => convertQueue.enqueue(r));
+      toggleConvertButtonStatus();
+      processQueue();
+    } else {
+      alert($.i18n("alerts.noFilesSelected"));
+    }
   }
 
   function fileIcon(name) {
@@ -90,7 +105,7 @@
         url: "/Convert/Convert",
         data: JSON.stringify({
           fileName: file.name,
-          targetFormat: "JPG",
+          targetFormat: toFormat,
           path: file.path,
         }),
         success: function (dt) {
@@ -102,6 +117,10 @@
             .addClass("fas fa-check");
         },
       });
+    }
+
+    if (convertQueue.isEmpty()) {
+      toggleButtonStatus(true);
     }
   }
 
@@ -122,18 +141,14 @@
   }
 
   $("#call-to-action").on("click", function () {
-    $("#call-to-action").addClass("upload--loading");
+    // $("#call-to-action").addClass("upload--loading");
+    setFormatOfInput();
     $(".upload-hidden").click();
-  });
-
-  $(".convert-files").on("click", function () {
-    convertFiles();
   });
 
   $(".upload-hidden").on("change", function (e) {
     $("#call-to-action").removeClass("upload--loading");
     $("body").addClass("file-process-open");
-
     loadFiles($(this).prop("files"));
   });
 
@@ -148,4 +163,70 @@
   $(".file-upload-bar").on("click", function (event) {
     event.stopPropagation();
   });
+
+  var formats = ["ANY", "JPG", "HEIC", "PNG", "JPEG"];
+  setFormatOfInput();
+  function setFormatOfInput() {
+    $(".upload-hidden").attr(
+      "accept",
+      fromFormat == "ANY" ? getAllFormats() : `.${fromFormat}`
+    );
+  }
+
+  function getAllFormats() {
+    let data = "";
+
+    formats.forEach((format) => {
+      if (format != "ANY") {
+        data += `.${format},`;
+      }
+    });
+    return data;
+  }
+
+  $.each(formats, function (i, format) {
+    fromSelector.append(
+      $("<option>", {
+        value: format,
+        text: format,
+      })
+    );
+
+    if (!["ANY", "HEIC"].includes(format)) {
+      toSelector.append(
+        $("<option>", {
+          value: format,
+          text: format,
+        })
+      );
+    }
+  });
+
+  fromSelector.on("change", function () {
+    fromFormat = $(this).val();
+  });
+
+  toSelector.on("change", function () {
+    toFormat = $(this).val();
+  });
+
+  $(".convert-files").on("click", function () {
+    const checkDisabled = $(this).attr("disabled");
+    if (!checkDisabled) {
+      convertFiles();
+    }
+  });
+
+  function toggleConvertButtonStatus() {
+    $(".convert-files").attr("disabled", function (index, attr) {
+      return attr ? null : true;
+    });
+  }
+  function toggleButtonStatus(enable) {
+    if (enable) {
+      $(".convert-files").attr("disabled", null);
+    } else {
+      $(".convert-files").attr("disabled", true);
+    }
+  }
 });

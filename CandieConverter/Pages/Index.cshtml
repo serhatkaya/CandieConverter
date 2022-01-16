@@ -1,13 +1,7 @@
 ﻿@page
 @model IndexModel
-@{
 
-
-
-	ViewData["Title"] = "Home page";
-}
-
-<div class="header-container-wrapper">
+<div class="header-container-swrapper">
 	<div class="header-container">
 		<div class="custom-header-bg">
 			<div class="page-center">
@@ -19,10 +13,6 @@
 								<option value="tr">TR</option>
 								<option value="en" selected>EN</option>
 							</select>
-						</li>
-						<li>
-							<a href="#" class="button convert-files"><i class="fas fa-upload"
-									aria-hidden="true"></i>Convert</a>
 						</li>
 						<li>
 							<a href="#" class="button open-progress"><i class="fa fa-tasks"
@@ -38,12 +28,19 @@
 <div class="body-container-wrapper">
 	<div class="body-container">
 		<div class="page-center">
-			<i class="fa fa-sync" aria-hidden="true"></i>
+			<i class="fa fa-sync convert-files" aria-hidden="true"></i>
+			<div class="options-container">
+				<select name="fromSelector" id="fromSelector">
+				</select>
+				<span data-i18n="format.to">To</span>
+				<select name="toSelector" id="toSelector">
+				</select>
+			</div>
 			<h1 data-i18n="slogan">Simply convert your files</h1>
-			<a class="upload" id="call-to-action"><span data-i18n="select.folder">Select folder</span></a>
+			<a class="upload" id="call-to-action"><span data-i18n="select.folder">Select files</span></a>
 			<form id="upload" method="post" action="upload.php" enctype="multipart/form-data">
 				<div id="drop">
-					<input type="file" webkitdirectory directory multiple name="upl" class="upload-hidden" />
+					<input type="file" multiple name="upl" class="upload-hidden" />
 				</div>
 			</form>
 			<div class="file-upload-bar">
