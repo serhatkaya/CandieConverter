@@ -4,7 +4,9 @@ Convert images to any format.
 
 ###### Supported formats
 
--   Currently only convert .heic files to jpg, soon more formats will be available.
+-  JPG, JPEG
+-  HEIC
+-  PNG
 
 # OS Support
 
