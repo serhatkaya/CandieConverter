@@ -1,0 +1,14 @@
+{
+  "@metadata": {
+    "authors": ["Serhat KAYA"],
+    "last-updated": "",
+    "locale": "en"
+  },
+  "title": "Candie Converter",
+  "slogan": "Basitçe dosyalarınızı dönüştürün.",
+  "select.folder": "Klasör seç",
+  "status.readyForConvert": "Hazır!",
+  "status.converting": "Dönüştürülüyor",
+  "status.converted": "Başarıyla dönüştürüldü!",
+  "status.failed": "Başarısız, lütfen dosyanın var olduğundan emin olun"
+}
