@@ -1,0 +1,37 @@
+.card {
+	border-radius: 14px;
+	color: #fff;
+	padding: 0.5em 1.6em;
+	display: flex;
+	box-shadow: 2px 2px 1px 2px #efefef;
+	overflow: hidden;
+}
+.text-center {
+	text-align: center;
+}
+.mt-5 {
+	margin-top: 3em;
+}
+.purple-card {
+	background: linear-gradient(to right, #8467d7, #893bff);
+}
+
+.orange-card {
+	background: linear-gradient(to right, #c24641, #dc381f);
+}
+
+.green-card {
+	background: linear-gradient(to right, #4cc552, #4cc417);
+}
+
+.blue-card {
+	background: linear-gradient(to right, #48cccd, #43c6db);
+}
+
+.mt-2 {
+	margin-top: 18px;
+}
+
+.card-heading {
+	margin-top: 0.3em !important;
+}

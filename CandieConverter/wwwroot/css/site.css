@@ -4,6 +4,9 @@ body {
 	margin: 0;
 	background: transparent;
 }
+#app {
+	overflow: hidden;
+}
 
 /* Use OS default fonts */
 body {
@@ -200,7 +203,7 @@ h1 {
 	box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
-.upload {
+.btn {
 	padding: 0;
 	background-color: #3498db;
 	background-image: 8121991;
@@ -243,11 +246,11 @@ h1 {
 	background: #f05454 !important;
 }
 
-.upload span {
+.btn span {
 	text-shadow: rgba(29, 111, 165, 0.9) 0 0 2px;
 }
 
-.upload span {
+.btn span {
 	padding: 20px 25px;
 	font: 700 13px Montserrat, Helvetica, Arial, sans-serif;
 	text-transform: uppercase;
@@ -258,7 +261,7 @@ h1 {
 	transition: all 350ms ease;
 }
 
-.upload:hover {
+.btn:hover {
 	background-color: #4aa3df;
 	background-image: 8121991;
 	background-image: -webkit-linear-gradient(#5faee3 0%, #3498db 100%);
@@ -273,11 +276,11 @@ h1 {
 		rgba(74, 163, 223, 0.5) 0 0 5px;
 }
 
-.upload:hover span {
+.btn:hover span {
 	text-shadow: rgba(33, 125, 187, 0.9) 0 0 2px;
 }
 
-.upload:active {
+.btn:active {
 	background-color: #258cd1;
 	background-image: 8121991;
 	background-image: -webkit-linear-gradient(#258cd1 0%, #258cd1 100%);
@@ -286,7 +289,7 @@ h1 {
 	background-image: linear-gradient(#258cd1 0%, #258cd1 100%);
 }
 
-.upload--loading {
+.btn--loading {
 	background-color: #258cd1 !important;
 	background-image: 8121991 !important;
 	background-image: -webkit-linear-gradient(
@@ -300,7 +303,7 @@ h1 {
 	cursor: wait;
 }
 
-.upload--loading:before {
+.btn--loading:before {
 	margin: -13px 0 0 -13px;
 	width: 24px;
 	height: 24px;
@@ -322,49 +325,18 @@ h1 {
 	animation: animation-rotate 750ms linear infinite;
 }
 
-.upload--loading span,
-.upload--loading:hover span,
-.upload--loading:active span {
-	color: transparent;
-	text-shadow: none;
-}
-
 .upload-hidden {
 	visibility: hidden;
 }
-.upload {
+.btn {
 	position: relative;
 	overflow: hidden;
 }
-.upload:after {
-	content: "";
-	position: absolute;
-	top: -110%;
-	left: -210%;
-	width: 200%;
-	height: 200%;
-	opacity: 0;
-	transform: rotate(30deg);
-	background: rgba(255, 255, 255, 0.13);
-	background: linear-gradient(
-		to right,
-		rgba(255, 255, 255, 0.13) 0%,
-		rgba(255, 255, 255, 0.13) 77%,
-		rgba(255, 255, 255, 0.5) 92%,
-		rgba(255, 255, 255, 0) 100%
-	);
-}
-.upload:hover:after {
-	opacity: 1;
-	top: -30%;
-	left: 100%;
-	transition-property: left, top, opacity;
-	transition-duration: 0.7s, 0.7s, 0.15s;
-	transition-timing-function: ease;
-}
-.upload:active:after {
+
+.btn:active:after {
 	opacity: 0;
 }
+
 .file-upload-bar {
 	height: 100%;
 	position: fixed;
@@ -575,8 +547,7 @@ select {
 	width: 20em;
 	height: 3em;
 	padding: 0 4em 0 1em;
-	background: url(https://upload.wikimedia.org/wikipedia/commons/9/9d/Caret_down_font_awesome_whitevariation.svg)
-			no-repeat right 0.8em center/1.4em,
+	background: url(/img/caret-down.svg) no-repeat right 0.8em center/1.4em,
 		linear-gradient(
 			to left,
 			rgba(255, 255, 255, 0.3) 3em,
@@ -611,6 +582,12 @@ select::-ms-expand {
 
 .options-container select {
 	color: #000 !important;
+	background: url(/img/caret-down.svg) no-repeat right 0.8em center/1.4em,
+		linear-gradient(
+			to left,
+			rgba(33, 150, 243) 3em,
+			rgba(255, 255, 255, 0.2) 3em
+		) !important;
 }
 
 .options-container select option {
@@ -618,14 +595,14 @@ select::-ms-expand {
 	color: #000 !important;
 }
 
-.convert-files {
+.btn-candie {
 	cursor: pointer;
 	transition: all 0.2s;
 }
-.convert-files:not([disabled]):hover {
+.btn-candie:not([disabled]):hover {
 	transform: translateY(-1px);
 	filter: drop-shadow(0px 10px 4px #4444dd);
 }
-.convert-files:not([disabled]):active {
+.btn-candie:not([disabled]):active {
 	filter: drop-shadow(0px 5px 4px #4444dd);
 }

@@ -1,61 +1,35 @@
 using CandieConverter.Models;
-using ImageMagick;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Threading.Channels;
 using System.Threading.Tasks;
-using IOFile = System.IO;
 
 namespace CandieConverter.Controllers
 {
 	public class ConvertController : Controller
 	{
-		[HttpPost]
-		public async Task<ActionResult> Convert([FromBody] ConvertModel request)
+		private readonly ChannelWriter<ConvertModel> _channel;
+
+		public ConvertController(ChannelWriter<ConvertModel> channel)
 		{
-			if (IOFile.File.Exists(request.Path))
+			_channel = channel;
+		}
+
+		[HttpPost]
+		public async Task<ActionResult> Convert([FromBody] List<ConvertModel> request)
+		{
+			try
 			{
-				using (IMagickImage image = new MagickImage(request.Path))
+				foreach (var item in request)
 				{
-					string fileFolder = IOFile.Path.GetDirectoryName(request.Path);
-					string fileName = request.FileName.Split(".")[0];
-					//default jpeg.
-					string format = "JPEG";
-					// Save frame as jpg
-					switch (request.TargetFormat)
-					{
-						case "JPG":
-							format = "JPG";
-							image.Format = MagickFormat.Jpg;
-							break;
-						case "JPEG":
-							format = "JPEG";
-							image.Format = MagickFormat.Jpeg;
-							break;
-						case "PNG":
-							format = "PNG";
-							image.Format = MagickFormat.Png;
-							break;
-						default:
-							format = "JPEG";
-							image.Format = MagickFormat.Jpeg;
-							break;
-					}
-
-					string fullOutputPath = IOFile.Path.Combine(fileFolder, "candieOutput", $"{fileName}.{format}");
-					string outputFolder = fullOutputPath.Replace(IOFile.Path.GetFileName(fullOutputPath), string.Empty);
-
-					if (!IOFile.Directory.Exists(outputFolder))
-					{
-						IOFile.Directory.CreateDirectory(outputFolder);
-					}
-
-					await image.WriteAsync(fullOutputPath);
+					await _channel.WriteAsync(item);
 				}
 
-				return Ok(request);
+				return Ok("Files added to queue successfully");
 			}
-			else
+			catch (System.Exception e)
 			{
-				return BadRequest("File not found");
+				return BadRequest(e);
 			}
 		}
 	}

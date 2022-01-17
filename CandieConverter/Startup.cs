@@ -1,11 +1,14 @@
-using System.Collections.Generic;
+using System.Threading.Channels;
+using CandieConverter.Hubs;
+using CandieConverter.Models;
+using CandieConverter.Workers;
 using ElectronNET.API;
+using ElectronNET.API.Entities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
 
 namespace CandieConverter
 {
@@ -22,12 +25,11 @@ namespace CandieConverter
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services.AddMvc();
-			// services.AddRazorPages();
-			// services.AddControllers();
-			// services.AddSwaggerGen(c =>
-			// {
-			//     c.SwaggerDoc("v1", new OpenApiInfo { Title = "CandieConverter", Version = "v1" });
-			// });
+			services.AddHostedService<ConverterService>();
+			services.AddSingleton<Channel<ConvertModel>>(Channel.CreateUnbounded<ConvertModel>(new UnboundedChannelOptions() { SingleReader = true }));
+			services.AddSingleton<ChannelReader<ConvertModel>>(svc => svc.GetRequiredService<Channel<ConvertModel>>().Reader);
+			services.AddSingleton<ChannelWriter<ConvertModel>>(svc => svc.GetRequiredService<Channel<ConvertModel>>().Writer);
+			services.AddSignalR();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,6 +54,7 @@ namespace CandieConverter
 			app.UseEndpoints(endpoints =>
 			{
 				endpoints.MapControllers();
+				endpoints.MapHub<ConvertHub>("/convertHub");
 				endpoints.MapRazorPages();
 				endpoints.MapControllerRoute(
 					name: "default",
@@ -62,13 +65,20 @@ namespace CandieConverter
 
 			if (HybridSupport.IsElectronActive)
 			{
-				CreateWindow();
+				CreateWindow(env);
 			}
 		}
-		private async void CreateWindow()
+		private async void CreateWindow(IWebHostEnvironment env)
 		{
-			var window = await Electron.WindowManager.CreateWindowAsync();
-			// window.RemoveMenu();
+			BrowserWindowOptions options = new BrowserWindowOptions();
+			WebPreferences wp = new WebPreferences();
+			var window = await Electron.WindowManager.CreateWindowAsync(options);
+			if (!env.IsDevelopment())
+			{
+				wp.DevTools = false;
+				window.RemoveMenu();
+			}
+
 			window.Focus();
 			window.OnClosed += () =>
 			{

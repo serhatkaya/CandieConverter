@@ -1,16 +1,19 @@
 {
-  "@metadata": {
-    "authors": ["Serhat KAYA"],
-    "last-updated": "",
-    "locale": "en"
-  },
-  "title": "Candie Converter",
-  "slogan": "Simply convert your files",
-  "select.folder": "Select files",
-  "status.readyForConvert": "Ready for convert",
-  "status.converting": "Converting",
-  "status.converted": "Converted successfully!",
-  "status.failed": "Failed, please be sure file exists.",
-  "alerts.noFilesSelected": "There is no file selected.",
-  "format.to": "To"
+	"@metadata": {
+		"authors": ["Serhat KAYA"],
+		"last-updated": "",
+		"locale": "en"
+	},
+	"title": "Candie Converter",
+	"slogan": "Simply convert your files",
+	"select.folder": "Select files",
+	"status.readyForConvert": "Ready for convert",
+	"status.converting": "Converting",
+	"status.converted": "Converted successfully!",
+	"status.failed": "Failed, please be sure file exists.",
+	"alerts.noFilesSelected": "There is no file selected.",
+	"format.to": "To",
+	"status": "Status",
+	"selectedFiles": "Selected files",
+	"totalFiles": "Total files:"
 }

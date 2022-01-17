@@ -7,15 +7,18 @@
 	<title>CandieConverter</title>
 	<link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" />
 	<link rel="stylesheet" href="~/css/site.css" />
+	<link rel="stylesheet" href="~/css/statistics.css" />
+	<link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css" />
 
 </head>
 
 <body>
 	@RenderBody()
 
-	<script src="~/lib/jquery/dist/jquery.min.js" onload="window.$ = window.jQuery = module.exports;"
+	<script src="~/lib/jquery/jquery.min.js" onload="window.$ = window.jQuery = module.exports;"
 		asp-append-version="true">
 		</script>
+	<script src="~/lib/signalr/dist/browser/signalr.min.js"></script>
 	<script src="~/js/CLDRPluralRuleParser.js"></script>
 	<script src="~/lib/jquery.i18n/jquery.i18n.js"></script>
 	<script src="~/lib/jquery.i18n/jquery.i18n.messagestore.js"></script>
@@ -24,8 +27,10 @@
 	<script src="~/lib/jquery.i18n/jquery.i18n.parser.js"></script>
 	<script src="~/lib/jquery.i18n/jquery.i18n.emitter.js"></script>
 	<script src="~/lib/jquery.i18n/jquery.i18n.emitter.bidi.js"></script>
-	<script src="~/js/queue.js" asp-append-version="true"></script>
+	<script src="~/js/vue.js"></script>
+	<script src="~/js/main.js" asp-append-version="true"></script>
 	<script src="~/js/site.js" asp-append-version="true"></script>
+
 
 	@await RenderSectionAsync("Scripts", required: false)
 </body>
