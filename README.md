@@ -1,10 +1,15 @@
 # Candie Converter
 
-Convert images to any format.
+Candie media converter.
+# Features
+- Convert images to another formats.
+- Video files will be available soon.
 
 ###### Supported formats
 
--   Currently only convert .heic files to jpg, soon more formats will be available.
+-  JPG, JPEG
+-  HEIC
+-  PNG
 
 # OS Support
 
