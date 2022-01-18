@@ -15,5 +15,9 @@
 	"format.to": "To",
 	"status": "Status",
 	"selectedFiles": "Selected files",
-	"totalFiles": "Total files:"
+	"totalFiles": "Total files:",
+	"stats.converted": "Converted",
+	"stats.enqueued": "Enqueued",
+	"stats.failed": "Failed",
+	"stats.total": "Total"
 }

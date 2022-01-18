@@ -34,7 +34,7 @@ const MainComponent = {
 			<div class="col-md-3 mt-2">
 				<div class="card purple-card">
 					<div class="content">
-						<h3>Total</h3>
+						<h3 data-i18n="stats.total">Total</h3>
 						<p>{{files.length}}</p>
 					</div>
 				</div>
@@ -42,7 +42,7 @@ const MainComponent = {
 			<div class="col-md-3 mt-2">
 			<div class="card green-card">
 				<div class="content">
-					<h3>Converted</h3>
+					<h3 data-i18n="stats.converted">Converted</h3>
 					<p>{{files.filter(file => file.status == 2).length}}</p>
 				</div>
 			</div>
@@ -51,7 +51,7 @@ const MainComponent = {
 			
 			  <div class="card blue-card">
 			  <div class="content">
-				 <h3>Enqueued</h3>
+				 <h3 data-i18n="stats.enqueued">Enqueued</h3>
 				 <p>{{files.filter(file => file.status == 1).length}}</p>
 			  </div>
 			 
@@ -61,7 +61,7 @@ const MainComponent = {
 			 
 			  <div class="card orange-card">
 			  <div class="content">
-				 <h3>Failed</h3>
+				 <h3 data-i18n="stats.failed">Failed</h3>
 				 <p>{{files.filter(file => file.status == 3).length}}</p>
 			  </div>
 		   </div>
@@ -290,7 +290,6 @@ const MainComponent = {
 	data() {
 		return {
 			formats: ["ANY", "JPG", "HEIC", "PNG", "JPEG"],
-			items: [1, 2],
 			files: [],
 			language: "EN",
 			fromFormat: "ANY",

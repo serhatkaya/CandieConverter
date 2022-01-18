@@ -15,5 +15,9 @@
 	"format.to": "Dönüştür",
 	"status": "Durum",
 	"selectedFiles": "Seçili dosyalar",
-	"totalFiles": "Toplam dosya:"
+	"totalFiles": "Toplam dosya:",
+	"stats.converted": "Dönüştürüldü",
+	"stats.enqueued": "Kuyrukta",
+	"stats.failed": "Başarısız",
+	"stats.total": "Toplam"
 }
