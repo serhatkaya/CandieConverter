@@ -22,4 +22,4 @@ Candie media converter.
 ## Development
 
 -   Its an electronized project using [ElectronNET](https://github.com/ElectronNET/Electron.NET). Follow the instructions on [ElectronNET ](https://github.com/ElectronNET/Electron.NET)repository Readme.
--   This project using libman library manager. You should libman restore before running it.
+-   This project using libman library manager. You should use "libman restore" before running it.
