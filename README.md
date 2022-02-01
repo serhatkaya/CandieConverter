@@ -1,5 +1,7 @@
 # Candie Converter
 
+![alt text](https://github.com/serhatkaya/CandieConverter/blob/master/docs/preview.png?raw=true)
+
 Candie media converter.
 
 # Features
